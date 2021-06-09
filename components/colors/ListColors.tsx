@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, SafeAreaView,Image, Button, StyleSheet } from 'react-native';
 
-export default function ListColors({color, btnText}) {
+export default function ListColors({color, btnText, addList}) {
     return (
         <SafeAreaView style={styles.grid}>
             <View style={{width: 120, height: 120, backgroundColor: color.hex.value}} />
@@ -11,6 +11,7 @@ export default function ListColors({color, btnText}) {
             <Button
                 title={btnText}
                 color="#10C662"
+                onPress={() => addList(color)}
             />
         </SafeAreaView>
     )

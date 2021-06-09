@@ -2,15 +2,24 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import Header from './components/layout/Header';
 import ListColors from './components/colors/ListColors';
+import ListCart from './components/cart/ListCart';
 import axios from 'axios';
 
 const App = () => {
 
-  const [color, setColor]  = useState({});
   const [colors, setColors] = useState([]);
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const Separator = () => (
+    <View style={styles.separator} />
+  );
+
+  const addList = (obj) =>{
+    setList(prevItems =>  {
+      return [{id: obj.hex.clean, hex:obj.hex.value, name: obj.name.value},...prevItems];
+    });
+  }
 
   //Get Colors Scheme
   useEffect(()=> {
@@ -25,8 +34,17 @@ const App = () => {
       <FlatList 
         data={colors}
         numColumns={2}
+        keyExtractor={(item, index) => (item.hex.value)}
         renderItem={({item}) =>(
-          <ListColors color={item} />
+          <ListColors color={item} addList={addList} />
+        )} 
+        />
+        <Separator />
+        <Text>Produtos Adicionados:</Text>
+      <FlatList 
+        data={list}
+        renderItem={({item}) =>(
+          <ListCart item={item} />
         )} 
         />
     </View>
@@ -37,6 +55,11 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingTop: 40
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   }
 })
 

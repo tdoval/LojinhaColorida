@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, SafeAreaView,Image, Button, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
-export default function ListColors({color, btnText, addList}) {
+
+const ListColors = ({color, btnText, addList}) => {
     return (
         <SafeAreaView style={styles.grid}>
             <View style={{width: 120, height: 120, backgroundColor: color.hex.value}} />
@@ -15,6 +17,12 @@ export default function ListColors({color, btnText, addList}) {
             />
         </SafeAreaView>
     )
+}
+
+
+ListColors.propType = {
+    color: PropTypes.object.isRequired,
+    addList: PropTypes.func.isRequired,
 }
 
 ListColors.defaultProps = {
@@ -51,3 +59,5 @@ const styles = StyleSheet.create({
         padding: 20
     }
 })
+
+export default ListColors;

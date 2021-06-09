@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
+import PropTypes from 'prop-types'
 
-export default function ListCart({item, deleteList}) {
+
+const ListCart = ({item, deleteList}) => {
     return (
         <TouchableHighlight style={styles.listItem}>
             <View style={styles.listItemView}>
@@ -12,6 +14,11 @@ export default function ListCart({item, deleteList}) {
             </View>
         </TouchableHighlight>
     )
+}
+
+ListCart.propType = {
+    item: PropTypes.object.isRequired,
+    deleteList: PropTypes.func.isRequired,
 }
 
 const styles =  StyleSheet.create({
@@ -31,3 +38,5 @@ const styles =  StyleSheet.create({
     }
 
 })
+
+export default ListCart;

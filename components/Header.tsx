@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 const Header = () => {
     return (
         <View style={styles.header}>
-            <Text style={styles.text}>Ton</Text>
+            <Text style={styles.text}>Lojinha</Text>
             <AntDesign name="shoppingcart" size={28} color="black" />
         </View>
     )

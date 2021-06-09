@@ -1,26 +1,23 @@
 import React from 'react';
 import { View, Text, SafeAreaView,Image, Button, StyleSheet } from 'react-native';
 
-export default function AddItem({color, title}) {
+export default function ListColors({color, btnText}) {
     return (
         <SafeAreaView style={styles.grid}>
-            <View />
-            <View style={{width: 120, height: 120, backgroundColor: color.hex}} />
-            <Text>
-                {color.name}
+            <View style={{width: 120, height: 120, backgroundColor: color.hex.value}} />
+            <Text style={styles.text}>
+                {color.name.value}
             </Text>
-            {color.available ? (<Button 
-                title={title}
-            />) : (<Button 
-                disabled
-                title='remove'
-            />)}
+            <Button
+                title={btnText}
+                color="#10C662"
+            />
         </SafeAreaView>
     )
 }
 
-AddItem.defaultProps = {
-    title: 'Add'
+ListColors.defaultProps = {
+    btnText: 'Add'
 }
 
 const styles = StyleSheet.create({
@@ -34,6 +31,16 @@ const styles = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
+    },
+    text: {
+        marginVertical: 4,
+        fontSize: 16,
+        color:'darkslateblue'
+    },
+    btn: {
+        backgroundColor: 'red',
+        padding: 25,
+        margin: 6,
     },
     item: {
         alignItems: "center",

@@ -1,15 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import Header from './components/Header';
-import AddItem from './components/AddItem';
+import Header from './components/layout/Header';
+import ListColors from './components/colors/ListColors';
+import axios from 'axios';
 
 const App = () => {
 
-  const [colors, setItems] = useState([
-    {id: '1', available:true, name: 'color1', hex: '#04429A', uriImage:"http://www.thecolorapi.com/id?format=svg&named=false&hex=04429A"},
-    {id: '2', available:false, name: 'Blue Gray', hex: '#0309A2', uriImage:"http://www.thecolorapi.com/id?format=svg&named=false&hex=BE4C67"},
-    {id: '3', available:true, name: 'Kingfisher Daisy', hex: '#3A02A9', uriImage:"http://www.thecolorapi.com/id?format=svg&named=false&hex=3A02A9"},
-  ]);
+  const [color, setColor]  = useState({});
+  const [colors, setColors] = useState([]);
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+
+  //Get Colors Scheme
+  useEffect(()=> {
+    setLoading(true);
+    axios.get('https://www.thecolorapi.com/scheme?hex=2842AB&format=json&mode=analogic&count=6')
+    .then((response => setColors(response.data.colors)), setLoading(false));
+  }, [])
 
   return (
     <View style={styles.container} >
@@ -18,7 +26,7 @@ const App = () => {
         data={colors}
         numColumns={2}
         renderItem={({item}) =>(
-          <AddItem color={item} />
+          <ListColors color={item} />
         )} 
         />
     </View>

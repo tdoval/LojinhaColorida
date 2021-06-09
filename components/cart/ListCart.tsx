@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 
-export default function ListCart({item}) {
+export default function ListCart({item, deleteList}) {
     return (
         <TouchableHighlight style={styles.listItem}>
             <View style={styles.listItemView}>
             <View style={{width: 30, height: 30, backgroundColor: item.hex}} />
                 <Text style={styles.listItemText}>{item.name}</Text>
-                <AntDesign name="closecircleo" size={24} color="red" />
+                <AntDesign name="closecircleo" size={24} color="red" onPress={() => deleteList(item.id)}  />
             </View>
         </TouchableHighlight>
     )

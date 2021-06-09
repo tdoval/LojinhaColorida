@@ -21,6 +21,12 @@ const App = () => {
     });
   }
 
+  const deleteList = (id) =>{
+    setList(prevItems => {
+      return prevItems.filter(item => item.id != id);
+    })
+  }
+
   //Get Colors Scheme
   useEffect(()=> {
     setLoading(true);
@@ -44,7 +50,7 @@ const App = () => {
       <FlatList 
         data={list}
         renderItem={({item}) =>(
-          <ListCart item={item} />
+          <ListCart item={item} deleteList={deleteList} />
         )} 
         />
     </View>
